@@ -2,8 +2,8 @@ import z from 'zod'
 
 const loginValidationSchema = z.object({
   body: z.object({
-    id: z.string({ required_error: 'Id is required' }),
-    password: z.string({ required_error: 'Password is required' }),
+    email: z.string().email('Invalid email format'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
   }),
 })
 
@@ -20,25 +20,10 @@ const refreshTokenValidationSchema = z.object({
   }),
 })
 
-// export const loginSchema = z.object({
-//   email: z.string().email(),
-//   password: z.string().min(6),
-// });
-
-// export const registerSchema = z.object({
-//   firstName: z.string().min(1),
-//   lastName: z.string().min(1),
-//   email: z.string().email(),
-//   password: z.string().min(8),
-//   roleName: z.enum(['admin', 'manager', 'agent', 'customer']),
-//   phone: z.string().optional(),
-//   department: z.string().optional(),
-// });
-
-// export const changePasswordSchema = z.object({
-//   currentPassword: z.string().min(6),
-//   newPassword: z.string().min(8),
-// });
+export const registerValidationSchema = z.object({
+  email: z.string().email('Invalid email format'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+})
 
 export const authValidation = {
   loginValidationSchema,

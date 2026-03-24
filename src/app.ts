@@ -8,19 +8,20 @@ import GlobalErrorHandler from './app/middlewares/GlobalErrorHandler'
 import NotFound from './app/middlewares/NotFound'
 import router from './app/routes'
 import cookieParser from 'cookie-parser'
+import config from './app/config'
 
 const app: Application = express()
 
 // parsers
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({ origin: ['localhost:3000s'] }))
+app.use(cors({ origin: ['localhost:3000'] }))
 
 // all application route here
 app.use('/api/v1', router)
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World')
+  res.send(`app listening on port ${config.port}`)
 })
 
 // global error handler
